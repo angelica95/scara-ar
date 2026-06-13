@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCARA AR - Vista</title>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Cámara de fondo -->
+  <video id="camara" autoplay muted playsinline></video>
+
+  <!-- Panel de información -->
+  <div class="panel-info">
+    <div class="panel-header">
+      <span class="dot"></span>
+      <h2>Robot SCARA</h2>
+    </div>
+    <div class="panel-body">
+      <div class="fila">
+        <span class="etiqueta">Grados de libertad</span>
+        <span class="valor">4 DOF</span>
+      </div>
+      <div class="fila">
+        <span class="etiqueta">Alcance</span>
+        <span class="valor">400 mm</span>
+      </div>
+      <div class="fila">
+        <span class="etiqueta">Carga máxima</span>
+        <span class="valor">2 kg</span>
+      </div>
+      <div class="fila">
+        <span class="etiqueta">Velocidad</span>
+        <span class="valor">500 mm/s</span>
+      </div>
+      <div class="fila">
+        <span class="etiqueta">Repetibilidad</span>
+        <span class="valor">±0.02 mm</span>
+      </div>
+      <div class="fila">
+        <span class="etiqueta">Ejes</span>
+        <span class="valor">J1 · J2 · Z · R</span>
+      </div>
+      <div class="fila">
+        <span class="etiqueta">Controlador</span>
+        <span class="valor">Arduino</span>
+      </div>
+    </div>
+    <div class="badge">● EN LÍNEA</div>
+  </div>
+
+  <!-- Holograma 3D en esquina -->
+  <div class="holo-contenedor">
+    <canvas id="holograma"></canvas>
+    <p class="holo-label">Modelo 3D · Rotando</p>
+  </div>
+
+  <!-- Botón volver -->
+  <button class="btn-volver" onclick="window.location.href='index.html'">← Volver</button>
+
+  <script src="robot.js"></script>
+  <script>
+    navigator.mediaDevices.getUserMedia({
+      video: { facingMode: 'environment' }
+    }).then(stream => {
+      document.getElementById('camara').srcObject = stream;
+    }).catch(() => {
+      document.body.style.background = '#111';
+    });
+  </script>
+</body>
+</html>
